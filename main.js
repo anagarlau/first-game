@@ -2,6 +2,7 @@
  let c = document.getElementById('canvas');
  let ctx = c.getContext('2d')
  let tile = 50
+ let moves = 0;
  //make map
 
  let map = [[1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],
@@ -18,7 +19,7 @@
  let collBox = [];
  let mapLength = map[0].length;
  let mapHeight = map.length;
- 
+ let username = ''
  //obstacle tiles
  let myTile = new Image()
 myTile.src = 'assets/tile1.png'
@@ -38,7 +39,27 @@ let miau = new Audio()
 miau.src = 'assets/miau.wav'
 
 let victoryMiau = new Audio();
-victoryMiau.src = 'assets/Nyan_cat.mp3'
+// victoryMiau.src = 'assets/Nyan_cat.mp3'
+
+function getPlayerName(){
+username = prompt('Insert name')
+console.log(username)
+}
+
+function addToHighScore(){
+  localStorage.setItem(username, moves);
+  showHighScore()
+}
+
+function showHighScore(){
+  let hS = document.getElementById('highScore');
+  hS.style.display = 'block'
+  for(let i=0; i<localStorage.length; i++){
+    hS.innerText += localStorage.key(i) + ' ' + localStorage.getItem(localStorage.key(i));
+    //do i want history?
+    hS.innerHTML += '</br>'
+  }
+}
 
 //2 iesirea
 function drawMap(m){
@@ -96,6 +117,8 @@ function move(x,y){
   player.x = player.newX;
   player.y = player.newY 
   //to save the values when you move
+  moves = moves + 1
+  document.querySelector('.gameScore span').innerText = moves;
 }
 
 //using collBox iteration if 1 2 or 0
@@ -110,11 +133,11 @@ for (let i=0; i< mapHeight; i++){
         console.log('Hit rock')
       }else if(b.status === 2){
         console.log('WIN')
-        
         move(player.newX, player.newY)
-       
         document.querySelector('.winner-game').style.display = 'block';
+         addToHighScore()
          victoryMiau.play()
+        
       }else {
         move(player.newX, player.newY);}
        }
@@ -142,4 +165,5 @@ window.onload = function(){
     drawMap(map)
     drawPlayer(0,0)
     console.log(collBox)
+    getPlayerName()
 }

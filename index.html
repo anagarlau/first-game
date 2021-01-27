@@ -4,19 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maze Game</title>
+    <title>Cat maze</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<div class="game">
+  <div class="gameScore">Score <span>0</span></div>
   <div class="winner-game"> You win! </div>
-  <div class="top_bar_box">
-    <div id="top_score_label">Score:</div>
-    <div id="score">0</div>
-    </div>
+ 
+  
+</div>
+
 
   <canvas id="canvas" width="750" height="400" style="border:1px solid black"></canvas>
-    
+  <div id="highScore">What others have been doing <br>
+    <!-- insert button to refresh -->
+  </div>
 
  <script src="main.js"> //  </script>   
 </body>
