@@ -66,10 +66,26 @@ function randomPoptart(map){
   map[randomCol][randomRow] = 4;
 }
 
+function randomFood(map){
+  let randomCol = Math.floor(Math.random() * (mapHeight-1));
+  let randomRow = Math.floor(Math.random() *(mapLength-1));
+
+  console.log(randomCol)
+  console.log(randomRow)
+
+  while(map[randomCol][randomRow] !== 0){
+    randomCol = Math.floor(Math.random() * (mapHeight-1));
+    randomRow = Math.floor(Math.random() * (mapLength-1));
+    // console.log(randomCol)
+    // console.log(randomRow)
+  } 
+  map[randomCol][randomRow] = 5
+}
+
 function resetMatrix(map){
   for (let row=0; row<mapHeight-1; row++){
     for(let col=0; col<mapLength-1; col++){
-      if(map[row][col] === 4 || map[row][col] ===3){
+      if(map[row][col] === 4 || map[row][col] ===3 || map[row][col] === 5 ){
         map[row][col] = 0;
       }
     }
@@ -112,18 +128,27 @@ obstacle.src = './assets/milk.png'
 let obstacle1 = new Image();
 obstacle1.src = './assets/poptart.png'
 
+let obstacle2 = new Image();
+obstacle2.src = './assets/food.png'
 
 function resetTiles(){
+
   myTile.src = './assets/tile1.png'
   floor.src = './assets/kitchen.jpg'
   mouse.src = './assets/mouse2.jpg'
   obstacle.src = './assets/milk.png'
   obstacle1.src = './assets/poptart.png' 
+  obstacle2.src = './assets/food.png'
 }
 
 
 function getPlayerName(){
   username = prompt('Insert name')
+}
+
+function addToHighScore(){
+  localStorage.setItem(username, score);
+  showHighScore()
 }
 
 function showHighScore(){
@@ -143,13 +168,10 @@ function showHighScore(){
     // //do i want history?
     // hS.innerHTML += '</br>'
   }
-  hS.innerText += localStorage.key(maxIndex) + ': ' + ' ' + localStorage.getItem(localStorage.key(maxIndex))  ;
+  hS.innerText += localStorage.key(maxIndex) + ':' + localStorage.getItem(localStorage.key(maxIndex))  ;
 }
 
-function addToHighScore(){
-  localStorage.setItem(username, score);
-  showHighScore()
-}
+
 
 
 
@@ -176,7 +198,10 @@ for (let i=0; i < m.length; i++){
      }else if(m[i][j] === 4){
           ctx.beginPath();
           ctx.drawImage(obstacle1, j*tile, i*tile, tile, tile)
-          } 
+      }else if(m[i][j] === 5){
+            ctx.beginPath();
+            ctx.drawImage(obstacle2, j*tile, i*tile, tile, tile)
+            }  
       else{
         ctx.beginPath();
         ctx.drawImage(floor,j*tile, i*tile, tile, tile)
@@ -189,6 +214,8 @@ for (let i=0; i < m.length; i++){
         a.status = 3
       }else if(m[i][j] === 4){
         a.status = 4
+      }else if(m[i][j] === 5){
+        a.status = 5
       }else{
         a.status = 0
       }
@@ -265,6 +292,14 @@ for (let i=0; i< mapHeight; i++){
         b.status = 0;
         obstacle1.src = floor.src;
       
+      }else if(b.status === 5){
+        console.log('lala')
+        move(player.newX, player.newY)
+        score = score + 5
+        document.querySelector('.gameScore span').innerText = score
+        slurp.play();
+        b.status = 0;
+        obstacle2.src = floor.src;
       }else {
         move(player.newX, player.newY);}
        }
@@ -328,6 +363,7 @@ function startGame(){
   collBox = []
   resetTiles();
   resetMatrix(map);
+  randomFood(map)
   randomMilk(map);
   randomPoptart(map);
   drawMap(map);

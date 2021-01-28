@@ -10,7 +10,7 @@
 body {
     margin:0;
     padding:0;
-    width: 80vw;
+    width: 100vw;
     height: 100vh;
     /* overflow: hidden; */
     background-image: url(assets/background.png);
