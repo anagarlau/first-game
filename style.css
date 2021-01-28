@@ -25,7 +25,7 @@ body {
 
 #gameWindow{
  width: 750px;
- max-width: 80%;
+ max-height:200px;
  background-color: #7EBDC2; 
  border-radius: 17px;
  padding: 10px;
@@ -37,6 +37,7 @@ body {
 }
 
 #resetButton{
+  
   background-color: pink;
   border: 1px solid violet;
   border-radius: 7px;
@@ -48,7 +49,12 @@ body {
 
 canvas {
   display: block;
+  border: 0 none white;
+  width: 750px;
+  height: 550px;
   border-radius: 17px;
+
+  /* border-radius: 17px; */
   }
 
   #highScore{

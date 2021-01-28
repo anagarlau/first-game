@@ -6,27 +6,27 @@
  let gameBar = document.getElementById('gameBar')
  let restartButton = document.getElementById('startGame');
  let hS = document.getElementById('highScore');
- let time = 10;
+ let time = 5;
  //make map
 
-let level1= "001111111111111000000101010001101111101010101100000000000101111111101111101100000000010101111110101110111101000100000001101110101011101100000101010000111111111111102"
 
-let firstLevel = new Map(level1);
- 
- 
 
- let map =  
- [[0,0,1,1,1,1,1,1,1,1,1,1,1,1,1], 
- [0,0,0,0,1,0,0,0,1,0,0,0,1,0,1],
- [1,0,1,1,1,1,1,0,1,0,1,1,1,0,1],
- [1,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
- [1,0,1,1,1,0,1,1,1,0,1,0,1,0,1],
- [1,0,1,0,0,0,1,0,0,0,1,0,0,0,1],
- [1,1,1,1,1,1,1,1,1,0,1,1,1,0,1],
- [1,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
- [1,0,1,0,1,1,1,1,1,1,1,1,1,0,1],
- [1,0,1,0,0,0,0,0,1,0,0,0,0,0,0],
- [1,1,1,1,1,1,1,1,1,1,1,1,1,0,2]]
+let firstLevel = new Map();
+ 
+ let map = firstLevel.matrix;
+
+//  let map =  
+//  [[0,0,1,1,1,1,1,1,1,1,1,1,1,1,1], 
+//  [0,0,0,0,1,0,0,0,1,0,0,0,1,0,1],
+//  [1,0,1,1,1,1,1,0,1,0,1,1,1,0,1],
+//  [1,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+//  [1,0,1,1,1,0,1,1,1,0,1,0,1,0,1],
+//  [1,0,1,0,0,0,1,0,0,0,1,0,0,0,1],
+//  [1,1,1,1,1,1,1,1,1,0,1,1,1,0,1],
+//  [1,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+//  [1,0,1,0,1,1,1,1,1,1,1,1,1,0,1],
+//  [1,0,1,0,0,0,0,0,1,0,0,0,0,0,0],
+//  [1,1,1,1,1,1,1,1,1,1,1,1,1,0,2]]
 
   let collBox = [];
  let mapLength = map[0].length;
@@ -37,8 +37,7 @@ function randomMilk(map){
   let randomCol = Math.floor(Math.random() * (mapHeight-1));
   let randomRow = Math.floor(Math.random() *(mapLength-1));
 
-  console.log(randomCol)
-  console.log(randomRow)
+ 
 
   while(map[randomCol][randomRow] !== 0){
     randomCol = Math.floor(Math.random() * (mapHeight-1));
@@ -53,15 +52,15 @@ function randomPoptart(map){
   let randomCol = Math.floor(Math.random() * (mapHeight-1));
   let randomRow = Math.floor(Math.random() * (mapLength-1));
 
-  console.log(randomCol)
-  console.log(randomRow)
+  // console.log(randomCol)
+  // console.log(randomRow)
 
   while(map[randomCol][randomRow] !== 0){
     randomCol = Math.floor(Math.random() * (mapHeight-1));
     randomRow = Math.floor(Math.random() * (mapLength-1));
 
-    console.log(randomCol)
-    console.log(randomRow)
+    // console.log(randomCol)
+    // console.log(randomRow)
   } 
   map[randomCol][randomRow] = 4;
 }
@@ -144,6 +143,9 @@ function resetTiles(){
 
 function getPlayerName(){
   username = prompt('Insert name')
+  if(username === ''){
+    username = "Player";
+  }
 }
 
 function addToHighScore(){
@@ -154,7 +156,7 @@ function addToHighScore(){
 function showHighScore(){
   
   hS.style.visibility = 'visible'
-  // hS.innerText= 'Highest Score' + '=>' + ' '
+  hS.children[1].innerText= ''
   let max = 0;
   let maxIndex = 0;
   for(let i=0; i<localStorage.length; i++){
@@ -168,7 +170,7 @@ function showHighScore(){
     // //do i want history?
     // hS.innerHTML += '</br>'
   }
-  hS.innerText += localStorage.key(maxIndex) + ':' + localStorage.getItem(localStorage.key(maxIndex))  ;
+  hS.children[1].innerText = localStorage.key(maxIndex) + ':' + localStorage.getItem(localStorage.key(maxIndex))  ;
 }
 
 
@@ -265,16 +267,15 @@ for (let i=0; i< mapHeight; i++){
     if (player.newX === b.x && player.newY === b.y){
       if(b.status === 1){
         miau.play()
-        console.log('Hit rock')
+        // console.log('Hit rock')
       }else if(b.status === 2){
-        console.log('WIN')
+        // console.log('WIN')
         score = score + 20
         document.querySelector('.gameScore span').innerText = score
         document.querySelector('.winner-game').style.visibility = 'visible';
-        //  addToHighScore()
         //  victoryMiau.play()
-         clearInterval(interval)
-         stopGame()
+        clearInterval(interval)
+        stopGame()
       }else if(b.status === 3){
         // score = score + 5
          move(player.newX, player.newY)
@@ -284,7 +285,7 @@ for (let i=0; i< mapHeight; i++){
         b.status = 0;
         obstacle.src = floor.src;
       }else if(b.status === 4){
-        console.log('lala')
+        // console.log('lala')
         move(player.newX, player.newY)
         score = score + 5
         document.querySelector('.gameScore span').innerText = score
@@ -293,7 +294,7 @@ for (let i=0; i< mapHeight; i++){
         obstacle1.src = floor.src;
       
       }else if(b.status === 5){
-        console.log('lala')
+        // console.log('lala')
         move(player.newX, player.newY)
         score = score + 5
         document.querySelector('.gameScore span').innerText = score
@@ -304,7 +305,7 @@ for (let i=0; i< mapHeight; i++){
         move(player.newX, player.newY);}
        }
     else if(player.newX < 0 || player.newX >= mapLength*tile || player.newY < 0 || player.newY >= mapHeight*tile){
-      console.log('hit wall')
+      // console.log('hit wall')
     }
   }
 }
@@ -358,6 +359,8 @@ function stopGame(){
 
 function startGame(){
   // ctx.clearRect(0,0, mapLength*tile, mapHeight*tile); //clear canvas in PX!
+  firstLevel = new Map();
+  map = firstLevel.matrix;
   score = 0;
   document.querySelector('.gameScore span').innerText = score
   collBox = []
@@ -378,37 +381,21 @@ function startGame(){
 
 
 
-function startLevel(map){
-  // ctx.clearRect(0,0, mapLength*tile, mapHeight*tile); //clear canvas in PX!
-  score = 0;
-  document.querySelector('.gameScore span').innerText = score
-  collBox = []
-  resetTiles();
-  resetMatrix(map);
-  randomMilk(map);
-  randomPoptart(map);
-  drawMap(map);
-  drawPlayer(0,0);
-  getPlayerName()
-  setTimer();
-  restartButton.style.visibility = "hidden"
-  c.style.visibility = "visible"
-  document.querySelector('.winner-game').style.visibility = 'hidden';
-  hS.style.visibility = 'hidden'
-}
 
 
  
 //PRESS IN WINDOW
 window.addEventListener('keydown', function(event){
-if (event.keyCode === 38) {player.newX = player.x ; player.newY = player.y - tile; console.log('UP')}
-if (event.keyCode === 37) {player.newX = player.x - tile; player.newY = player.y; console.log('LEFT')}
-if (event.keyCode === 39) {player.newX = player.x + tile; player.newY = player.y;console.log('RIGHT')}
-if (event.keyCode === 40) {player.newX = player.x ; player.newY = player.y + tile; console.log('DOWN')}
+if (event.keyCode === 38) {player.newX = player.x ; player.newY = player.y - tile; }
+if (event.keyCode === 37) {player.newX = player.x - tile; player.newY = player.y; }
+if (event.keyCode === 39) {player.newX = player.x + tile; player.newY = player.y; }
+if (event.keyCode === 40) {player.newX = player.x ; player.newY = player.y + tile; }
 checkCollision()
 
 //add collision check+sound
 } )
+
+
 
 window.onload = function(){
     startGame();
