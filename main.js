@@ -1,12 +1,12 @@
 
  let c = document.getElementById('canvas');
  let ctx = c.getContext('2d')
- let tile = 50;
+ let tile = 45;
  let score = 0;
  let gameBar = document.getElementById('gameBar')
  let restartButton = document.getElementById('startGame');
  let hS = document.getElementById('highScore');
- let time = 5;
+ let time = 25;
  //make map
 
 

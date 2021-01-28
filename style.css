@@ -24,11 +24,11 @@ body {
 
 
 #gameWindow{
- width: 750px;
+ width: 675px;
  max-height:200px;
  background-color: #7EBDC2; 
  border-radius: 17px;
- padding: 10px;
+ padding: 0;
  box-shadow: 0 0 10px 2px;
  display: grid;
  grid-template-rows: repeat(3, auto);
@@ -37,7 +37,7 @@ body {
 }
 
 #resetButton{
-  
+  padding: 5px;
   background-color: pink;
   border: 1px solid violet;
   border-radius: 7px;
@@ -50,8 +50,8 @@ body {
 canvas {
   display: block;
   border: 0 none white;
-  width: 750px;
-  height: 550px;
+  /* width: 750px;
+  height: 550px; */
   border-radius: 17px;
 
   /* border-radius: 17px; */
