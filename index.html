@@ -8,19 +8,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="game">
-  <div class="gameScore">Score <span>0</span></div>
-  <div class="winner-game"> You win! </div>
- 
-  
-</div>
+<div>Welcome to another pointless cat game!</div>
 
+ <div id="gameWindow">
+    <div class="game" id="gameBar">
+      <div class="gameScore">Score  <span>0</span></div>
+      <div class="winner-game"> You win! </div>
+      <div id="timer"> </div> 
+      <div id="highScore">Other players </br> </div>
+      <button id="startGame" onclick="startGame()"> Play Again!</button>
+   </div>
+ </div>   
 
-  <canvas id="canvas" width="750" height="400" style="border:1px solid black"></canvas>
-  <div id="highScore">What others have been doing <br>
+    <canvas id="canvas" width="750" height="550" style="border:1px solid black"></canvas>
+    <div id="highScore"> <br>
     <!-- insert button to refresh -->
-  </div>
+    </div>
 
+ <script src="map-generator.js"></script> 
  <script src="main.js"> //  </script>   
+
 </body>
 </html>
