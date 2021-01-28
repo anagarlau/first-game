@@ -143,7 +143,7 @@ function showHighScore(){
     // //do i want history?
     // hS.innerHTML += '</br>'
   }
-  hS.innerText += localStorage.key(maxIndex) + '' + localStorage.getItem(localStorage.key(maxIndex))  ;
+  hS.innerText += localStorage.key(maxIndex) + ': ' + ' ' + localStorage.getItem(localStorage.key(maxIndex))  ;
 }
 
 function addToHighScore(){
