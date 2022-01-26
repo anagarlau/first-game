@@ -14,7 +14,7 @@
 let firstLevel = new Map();
  
  let map = firstLevel.matrix;
-
+////
 //  let map =  
 //  [[0,0,1,1,1,1,1,1,1,1,1,1,1,1,1], 
 //  [0,0,0,0,1,0,0,0,1,0,0,0,1,0,1],
